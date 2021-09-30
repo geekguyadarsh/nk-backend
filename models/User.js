@@ -1,7 +1,7 @@
-import mongoose from "mongoose";
+const mongoose = require("mongoose");
 const { Schema } = mongoose;
 const crypto = require("crypto");
-import { v4 as uuidv4 } from "uuid";
+const { v4: uuidv4 } = require("uuid");
 
 const userSchema = new Schema(
   {
@@ -17,13 +17,13 @@ const userSchema = new Schema(
       required: true,
       minLength: 10,
       maxlength: 10,
-      uniqure: true,
+      unique: true,
     },
 
     email: {
       type: String,
       required: true,
-      uniqure: true,
+      unique: true,
     },
 
     countryCode: {
@@ -61,7 +61,8 @@ userSchema
   .set(function (password) {
     this._password = password;
     this.salt = uuidv4();
-    this.encryPassword = this.securePassword(password);
+
+    this.encryPassword = this.encryptPassword(password);
   })
   .get(function () {
     return this._password;
@@ -69,7 +70,7 @@ userSchema
 
 userSchema.methods = {
   authenticate: function (plainpassword) {
-    return this.encryptPassword(plainpassword) === this.securePassword;
+    return this.encryptPassword(plainpassword) === this.encryPassword;
   },
 
   // Function to encrypt the plain Password

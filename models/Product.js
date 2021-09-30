@@ -24,8 +24,8 @@ const productSchema = new mongoose.Schema({
     ref: "Category",
   },
 
-  inStock: {
-    type: Boolean,
+  stock: {
+    type: Number,
     required: true,
   },
 
@@ -34,5 +34,7 @@ const productSchema = new mongoose.Schema({
     default: 0,
   },
 
-  images: [{ imgUrl: { type: String } }],
+  images: [{ image: { type: String } }],
 });
+
+module.exports = mongoose.model("Product", productSchema);
