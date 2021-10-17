@@ -19,9 +19,21 @@ const productSchema = new mongoose.Schema({
     required: true,
   },
 
-  category: {
-    type: ObjectId,
-    ref: "Category",
+  category: [
+    {
+      type: ObjectId,
+      ref: "Category",
+    },
+  ],
+
+  sizes: {
+    type: Array,
+    default: [],
+  },
+
+  colors: {
+    type: Array,
+    default: [],
   },
 
   stock: {

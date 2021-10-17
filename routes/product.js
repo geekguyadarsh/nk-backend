@@ -1,5 +1,7 @@
 const express = require("express");
 const router = express.Router();
+
+//Multer Requirements
 const path = require("path");
 const multer = require("multer");
 const shortid = require("shortid");
@@ -18,7 +20,7 @@ const { getUserById } = require("../controllers/user");
 //Multer Configuration
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, path.join(path.dirname(__dirname), "/uploads"));
+    cb(null, path.join(path.dirname(__dirname), "/uploads/productAsset"));
   },
 
   filename: function (req, file, cb) {

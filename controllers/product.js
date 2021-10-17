@@ -13,7 +13,7 @@ exports.getProductById = (req, res, next, id) => {
 };
 
 exports.createProduct = (req, res) => {
-  const { name, description, price, category, stock } = req.body;
+  const { name, description, price, category, sizes, colors, stock } = req.body;
   let images = [];
 
   if (!req.files) {
@@ -28,9 +28,12 @@ exports.createProduct = (req, res) => {
     description,
     price,
     category,
+    sizes,
+    colors,
     stock,
     images,
   });
+
   product.save((err, product) => {
     if (err) {
       return res.status(400).json(err);
